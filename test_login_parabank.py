@@ -9,8 +9,8 @@ def test_login_shows_account_overview():
         page.goto("https://parabank.parasoft.com/parabank/index.htm")
 
         # When: user logs in with valid credentials
-        page.fill('input[name="username"]', "bonnie")
-        page.fill('input[name="password"]', "Miel2324")
+        page.fill('input[name="username"]', "john")
+        page.fill('input[name="password"]', "demo")
         page.click('input[value="Log In"]')
 
         # Then: the Accounts Overview page should be displayed
