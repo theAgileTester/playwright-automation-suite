@@ -46,6 +46,24 @@ numbers and some backend validations aren't fully deterministic across
 runs. Tests are written to read account data dynamically from the page
 rather than hardcoding values, to stay resilient to this.
 
+## Lessons learned
+A few real debugging findings from building this suite:
+
+- **Async/sync conflict in CI**: two legacy scripts using Playwright's
+  sync API directly (`sync_playwright()`) clashed with `pytest-playwright`'s
+  own event loop once run through `pytest` in CI, despite working fine
+  when run standalone. Fixed by excluding them from pytest collection.
+- **Race condition in a dynamically-loaded dropdown**: `wait_for_selector(state="attached")`
+  only waits for the *first* option to exist, not for the full list to
+  finish loading via AJAX — causing intermittent failures reading stale
+  option lists. Fixed with `wait_for_function()`, asserting the option
+  count explicitly.
+- **Order-dependent flakiness on a shared public demo**: a login test
+  with an invalid password occasionally succeeded in CI when run
+  immediately after a valid-login test, due to the demo app's
+  inconsistent session handling — confirmed by isolating the test and
+  re-running it alone.
+
 ## Status
 Core login and transfer flows automated and passing in CI. Actively
 expanding coverage.
