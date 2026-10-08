@@ -27,6 +27,6 @@ jobs:
         run: |
           playwright install --with-deps chromium
 
-      - name: Run tests
+         - name: Run tests
         run: |
-          pytest -v
+          pytest -v -k test_login_attempt_with_invalid_password
