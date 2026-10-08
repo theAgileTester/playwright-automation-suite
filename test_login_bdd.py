@@ -29,6 +29,7 @@ def login_with_invalid_credentials(page: Page):
     page.fill('input[name="username"]', "john")
     page.fill('input[name="password"]', "WrongPassword123")
     page.click('input[value="Log In"]')
+    page.wait_for_load_state("networkidle")
 
 
 @then("an error message should be displayed")
