@@ -99,6 +99,21 @@ A thorough test suite for this kind of system needs both angles
 covered — not just "does it catch fraud" but also "does it wrongly
 flag normal behaviour."
 
+## Findings (exploratory testing)
+Beyond automated regression coverage, manual exploration of the
+Transfer Funds flow surfaced real gaps in the application itself:
+
+- **No insufficient-funds validation** — the app accepts transfers for
+  amounts larger than the account balance.
+- **$0 transfers are accepted** — no minimum-amount validation.
+- **Generic error messaging** — leaving the amount field empty
+  returns a non-specific "An internal error has occurred" message
+  rather than a field-level validation error, making it hard for a
+  user (or a test) to know what went wrong.
+
+These would be filed as real defects/UX issues in a production QA
+process.
+
 ## Status
 Core login and transfer flows automated and passing in CI. Actively
 expanding coverage.
