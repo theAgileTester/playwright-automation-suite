@@ -83,6 +83,22 @@ context real financial software operates in:
   investment services; testing audit trails (e.g. transaction history)
   is a relevant QA concern.
 
+ ## AML / fraud detection awareness
+Banking systems also run anti-money-laundering (AML) and fraud
+detection checks on transactions — typically rule-based or ML-based
+scoring that flags unusual activity for review.
+
+From a testing perspective, the key tension is the **false
+positive / false negative trade-off**:
+- A **false positive** blocks or flags a legitimate transaction,
+  hurting customer experience.
+- A **false negative** misses genuinely suspicious activity, creating
+  regulatory and financial risk.
+
+A thorough test suite for this kind of system needs both angles
+covered — not just "does it catch fraud" but also "does it wrongly
+flag normal behaviour."
+
 ## Status
 Core login and transfer flows automated and passing in CI. Actively
 expanding coverage.
