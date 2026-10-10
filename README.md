@@ -64,6 +64,25 @@ A few real debugging findings from building this suite:
   inconsistent session handling — confirmed by isolating the test and
   re-running it alone.
 
+## Regulatory awareness
+Testing a banking application also means being aware of the regulatory
+context real financial software operates in:
+
+- **GDPR** — governs personal data handling; test data should never be
+  real customer data (this project uses ParaBank's public demo
+  credentials for exactly this reason).
+- **DORA** — requires financial institutions' IT systems to be
+  operationally resilient; automated regression suites and CI are part
+  of demonstrating that kind of continuous verification.
+- **PCI DSS** — security standard for systems handling card data; card
+  numbers must never appear in logs, screenshots, or test fixtures.
+- **PSD2** — mandates Strong Customer Authentication for payments; a
+  production-grade login/transfer test suite would need to cover MFA
+  flows, not just username/password.
+- **MiFID II** — requires transparency and accurate record-keeping for
+  investment services; testing audit trails (e.g. transaction history)
+  is a relevant QA concern.
+
 ## Status
 Core login and transfer flows automated and passing in CI. Actively
 expanding coverage.
